@@ -1,0 +1,4 @@
+# crontab -e
+*/1 * * * * /usr/local/sphinx/sh/delta.sh >> /usr/local/sphinx/crontab.log
+30 * * * * /usr/local/sphinx/sh/merge.sh >> /usr/local/sphinx/crontab.log
+0 02 * * * /usr/local/sphinx/sh/main.sh >> /usr/local/sphinx/crontab.log
