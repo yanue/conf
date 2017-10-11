@@ -3,6 +3,7 @@ php install
 
 yum install -y gcc gcc-c++  make cmake automake autoconf kernel-devel ncurses-devel libxml2-devel openssl-devel curl-devel libjpeg-devel libpng-devel  pcre-devel libtool-libs freetype-devel gd zlib-devel file bison patch mlocate flex diffutils   readline-devel glibc-devel glib2-devel bzip2-devel gettext-devel libcap-devel libmcrypt-devel openldap openldap-devel libxslt-devel
 yum install -y libpng libjpeg libpng-devel libjpeg-devel ghostscript libtiff libtiff-devel freetype freetype-devel
+yum install -y librabbitmq librabbitmq-devel ffmpeg ffmpeg-devel
 
 wget http://superb-dca2.dl.sourceforge.net/project/mcrypt/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz
 wget http://cn2.php.net/get/php-7.1.0.tar.gz/from/this/mirror
@@ -92,4 +93,9 @@ source /etc/profile
 wget http://pecl.php.net/get/gmagick-2.0.4RC1.tgz
 
 所需扩展:
-redis, beast, swoole, gmagick, sphinx, fastcommon, fastdfs_client, fastdht_client, scws
+redis, beast, swoole, gmagick, sphinx, fastcommon, fastdfs_client, fastdht_client, scws, amqp-1.7.1
+
+pecl install redis
+pecl install gmagick-beta
+
+wget https://pecl.php.net/get/amqp-1.7.1.tgz

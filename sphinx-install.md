@@ -2,15 +2,15 @@
 
 ### 1. download 
     cd /usr/local/src
-    git clone https://github.com/sphinxsearch/sphinx.git
+    ;git clone https://github.com/sphinxsearch/sphinx.git
     wget http://sphinxsearch.com/files/sphinx-2.2.10-release.tar.gz
     wget -c http://pecl.php.net/get/sphinx-1.3.3.tgz
 
 ### 2. install
     
 #### 2.1 install sphinx
-    
-    cd sphinx
+    tar -zxf sphinx-2.2.10-release.tar.gz
+    cd sphinx-2.2.10-release
     ./buildconf.sh
     ./configure --prefix=/usr/local/sphinx --with-mysql
     make -j16
@@ -26,13 +26,10 @@
     cd ../../
 
 #### 2.3 install php extension
-    
-    pecl install sphinx
-
- or
-    
-    tar zxvf sphinx-1.3.3.tgz
-    cd sphinx-1.3.3
+  
+    wget https://github.com/php/pecl-search_engine-sphinx/archive/php7.zip -O pecl-search_engine-sphinx-php7.zip   
+    unzip pecl-search_engine-sphinx-php7.zip
+    cd pecl-search_engine-sphinx-php7
     phpize
     ./configure --with-sphinx=/usr/local/sphinx/libsphinxclient
     make -j8 
@@ -63,3 +60,5 @@
     mkdir -p /opt/sphinx/log/
     
 ### start and add to crontab
+    wget -q -O - http://www.xunsearch.com/scws/down/scws-1.2.3.tar.bz2 | tar xjf -
+    

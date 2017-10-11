@@ -2,8 +2,6 @@
 datadir: /opt/mysql/data
 config: /etc/my.cnf
 
-yum install cmake
-
 # user and group
 groupadd mysql
 useradd -g mysql mysql -s /bin/false

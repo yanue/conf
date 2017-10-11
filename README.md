@@ -38,7 +38,10 @@ setenforce 0
 vi /etc/selinux/config  
 
 
-9. 安装顺序
+9. 设置go源
+ https://go-repo.io/
+
+10. 安装顺序
 fastdfs
 fastdht
 nginx
