@@ -79,6 +79,18 @@ service mysqld restart|start
  CREATE USER "cfg"@"%" IDENTIFIED BY 'Cfg@123';
  grant all privileges on *.* to cfg@'%';
  FLUSH PRIVILEGES;
+ 
+ CREATE USER "ckg"@"%" IDENTIFIED BY 'CKg@123';
+ grant all privileges on *.* to ckg@'%';
+ FLUSH PRIVILEGES;
+
+ CREATE USER "ckg_reader"@"%" IDENTIFIED BY 'CkgReader@123';
+ GRANT SELECT, SHOW VIEW, PROCESS, REPLICATION CLIENT ON *.* TO ckg_reader@'%';
+ FLUSH PRIVILEGES;
+ 
+ CREATE USER "replication"@"%" IDENTIFIED BY 'cfg-replication';
+ grant replication slave,file on *.* to 'replication'@'%' identified by 'cfg-replication';
+ FLUSH PRIVILEGES;
 
 ## mysql 双主机模式
 主主配置过程
