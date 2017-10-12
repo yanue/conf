@@ -127,5 +127,5 @@ mysql>unlock tables;
 change master to master_host='cfg-im',master_user='replication',master_password='cfg-replication',master_log_file='mysql-bin.000004',master_log_pos=154,MASTER_CONNECT_RETRY=60;
 
 服务器B:
-change master to master_host='cfg-web',master_user='replication',master_password='cfg-replication',master_log_file='mysql-bin.000009',master_log_pos=154,MASTER_CONNECT_RETRY=60;
+change master to master_host='cfg-web',master_user='replication',master_password='cfg-replication',master_log_file='mysql-bin.000008',master_log_pos=154,MASTER_CONNECT_RETRY=60;
 
