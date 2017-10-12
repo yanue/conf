@@ -2,9 +2,7 @@
 
 ### 1. download 
     cd /usr/local/src
-    ;git clone https://github.com/sphinxsearch/sphinx.git
     wget http://sphinxsearch.com/files/sphinx-2.2.10-release.tar.gz
-    wget -c http://pecl.php.net/get/sphinx-1.3.3.tgz
 
 ### 2. install
     
@@ -13,7 +11,7 @@
     cd sphinx-2.2.10-release
     ./buildconf.sh
     ./configure --prefix=/usr/local/sphinx --with-mysql
-    make -j16
+    make -j8
     make install
 
 #### 2.2 install libsphinxclient
@@ -23,7 +21,7 @@
     ./configure --prefix=/usr/local/sphinx/libsphinxclient
     make 
     make install
-    cd ../../
+    cd ../../../
 
 #### 2.3 install php extension
   
@@ -61,4 +59,21 @@
     
 ### start and add to crontab
     wget -q -O - http://www.xunsearch.com/scws/down/scws-1.2.3.tar.bz2 | tar xjf -
+    cd scws-1.2.3/
+    ./configure
+    make -j4
+    make install
+    cd phpext/
+    
+### start sphinx    
+
+    # 生成配置文件
+    php webroot/bin/sphinx.php
+    
+    # 复制sphinx脚本目录到/usr/local/sphinx/sh
+    cp sphinx /usr/local/sphinx/sh -rvf
+    
+    # 启动sphinx服务
+    indexer --all
+    searchd
     
