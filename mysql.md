@@ -1,4 +1,5 @@
 #配置说明：
+http://ygqygq2.blog.51cto.com/1009869/1870864
 datadir: /opt/mysql/data
 config: /etc/my.cnf
 
