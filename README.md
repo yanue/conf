@@ -1,7 +1,7 @@
 ### fst
 1. 修改hostname
 /etc/sysconfig/network
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ssh-keygen -t rsa -b 4096 -C "dev@estt.com.cn"
 
 2. 同步时间
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime

@@ -76,4 +76,48 @@
     # 启动sphinx服务
     indexer --all
     searchd
-    
+
+### 词库安装
+ 		wget http://www.xunsearch.com/scws/down/scws-dict-chs-utf8.tar.bz2
+ 		tar jxvf scws-dict-chs-utf8.tar.bz2 -C /usr/local/scws/etc/
+ 		chown www:www /usr/local/scws/etc/dict.utf8.xdb
+ 		
+### sphinx的管理命令：
+	1. 生成全部索引
+	
+	/usr/local/sphinx/bin/indexer --config /usr/local/sphinx/etc/sphinx.conf --all
+	
+	若此时searchd守护进程已经启动，那么需要加上—rotate参数：
+	
+	/usr/local/sphinx/bin/indexer --config /usr/local/sphinx/etc/sphinx.conf --all --rotate
+	
+	2. 启动searchd守护进程
+	
+	/usr/local/sphinx/bin/searchd --config /usr/local/sphinx/etc/sphinx.conf
+	
+	3. 生成主索引
+	
+	写成shell脚本，添加到crontab任务，设置成每天凌晨1点的时候重建主索引
+	
+	/usr/local/sphinx/bin/indexer --config /usr/local/sphinx/etc/sphinx.conf --rotate index_search_main
+	
+	4. 生成增量索引
+	
+	写成shell脚本，添加到crontab任务，设置成每10分钟运行一次
+	
+	/usr/local/sphinx/bin/indexer --config /usr/local/sphinx/etc/sphinx.conf --rotate index_search_main_delta
+	
+	5. 增量索引和主索引的合并
+	
+	写成shell脚本，添加到计划任务，每15分钟跑一次
+	
+	/usr/local/sphinx/bin/indexer --config /usr/local/sphinx/etc/sphinx.conf --merge index_search_main index_search_main_delta --rotate
+	
+	6. 使用search命令在命令行对索引进行检索
+	
+	/usr/local/sphinx/bin/search --config /usr/local/sphinx/etc/sphinx.conf
+	
+### 定时任务： crontab -e
+	*/1 * * * * /usr/local/sphinx/sh/delta.sh >> /usr/local/sphinx/crontab.log
+	30 * * * * /usr/local/sphinx/sh/merge.sh >> /usr/local/sphinx/crontab.log
+	0 02 * * * /usr/local/sphinx/sh/main.sh >> /usr/local/sphinx/crontab.log

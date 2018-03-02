@@ -32,12 +32,9 @@ mkdir /opt/fastdfs/media/tracker -p
 mkdir /opt/fastdfs/pic/store0/data -p
 mkdir /opt/fastdfs/media/store0/data -p
 
-mkdir /opt/fastdht/pic -p
-mkdir /opt/fastdht/media -p
 
 pkill fdfs_trackerd
 pkill fdfs_storaged 
-pkill fdhtd 
 
 fdfs_trackerd /etc/fdfs/tracker_pic.conf
 fdfs_trackerd /etc/fdfs/tracker_media.conf
@@ -49,3 +46,5 @@ fdhtd /etc/fdht/fdht_pic.conf
 fdhtd /etc/fdht/fdht_media.conf
 
 
+mkdir /opt/fastdht/pic -p
+mkdir /opt/fastdht/media -p

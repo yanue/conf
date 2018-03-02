@@ -81,7 +81,7 @@ service mysqld restart|start
  grant all privileges on *.* to cfg@'%';
  FLUSH PRIVILEGES;
  
- CREATE USER "ckg"@"%" IDENTIFIED BY 'CKg@123';
+ CREATE USER "ckg"@"%" IDENTIFIED BY 'Ckg@123';
  grant all privileges on *.* to ckg@'%';
  FLUSH PRIVILEGES;
 
@@ -114,12 +114,19 @@ flush privileges;
 mysql>flush tables with read lock;
 mysql>show master status\G
 *************************** 1. row ***************************
-            File: binlog.000006
-        Position: 107
-    Binlog_Do_DB: test
-Binlog_Ignore_DB: mysql
+             File: mysql-bin.000066
+         Position: 71710056
+     Binlog_Do_DB: ckg
+ Binlog_Ignore_DB: information_schema,mysql,sys
+Executed_Gtid_Set:
 1 row in set (0.00 sec)
-
+*************************** 1. row ***************************
+             File: mysql-bin.000065
+         Position: 876898714
+     Binlog_Do_DB: ckg
+ Binlog_Ignore_DB: information_schema,mysql,sys
+Executed_Gtid_Set:
+1 row in set (0.00 sec)
 mysql>unlock tables;
 
 
@@ -129,3 +136,6 @@ change master to master_host='cfg-im',master_user='replication',master_password=
 服务器B:
 change master to master_host='cfg-web',master_user='replication',master_password='cfg-replication',master_log_file='mysql-bin.000008',master_log_pos=154,MASTER_CONNECT_RETRY=60;
 
+start slave;
+stop slave;
+show slave status\G
