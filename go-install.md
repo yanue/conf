@@ -1,0 +1,45 @@
+#go安装
+
+## 下载go
+ https://dl.google.com/go/go1.9.2.linux-amd64.tar.gz
+
+## 解压指定目录(/usr/local/go)
+ tar -C /usr/local -xzf go1.9.2.linux-amd64.tar.gz
+
+## 环境变量(/etc/bashrc)
+ export GOROOT=/usr/local/go
+ export GOPATH=/opt/go
+ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+## 创建目录
+ mkdir /opt/go/src
+
+# webim安装
+## clone项目源码
+ cd /opt/go/src
+ git clone http://git.estt.com.cn/web/ckg-im.git
+
+## go包管理工具
+ go get -u github.com/gpmgo/gopm
+
+## 热编译工具
+ gopm get -v -g -u github.com/caixw/gobuild
+
+##依赖包
+ gopm get -v -g -u github.com/hoisie/redis
+ gopm get -v -g -u github.com/olahol/melody
+ gopm get -v -g -u github.com/go-ini/ini
+ gopm get -v -g -u github.com/go-xorm/xorm
+ gopm get -v -g -u github.com/go-sql-driver/mysql
+ gopm get -v -g -u github.com/gorilla/websocket
+ gopm get -v -g -u github.com/gin-gonic/gin
+ gopm get -v -g -u github.com/sideshow/apns2
+ gopm get -v -g -u github.com/streadway/amqp
+ gopm get -v -g -u github.com/tylerb/graceful
+
+## 后台运行
+ cp init.d/webim /etc/init.d/
+ chmod +x /etc/init.d/webim
+ chkconfig webim on
+ service webim start
+
