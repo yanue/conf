@@ -86,7 +86,7 @@ service mysqld restart|start
  FLUSH PRIVILEGES;
 
  CREATE USER "ckg_reader"@"%" IDENTIFIED BY 'CkgReader@123';
- GRANT SELECT, SHOW VIEW, PROCESS, REPLICATION CLIENT ON *.* TO ckg_reader@'%';
+ GRANT SELECT, SHOW VIEW, PROCESS, SUPER, REPLICATION CLIENT ON *.* TO ckg_reader@'%';
  FLUSH PRIVILEGES;
  
  CREATE USER "replication"@"%" IDENTIFIED BY 'cfg-replication';
