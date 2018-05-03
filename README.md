@@ -4,7 +4,7 @@
 ssh-keygen -t rsa -b 4096 -C "dev@estt.com.cn"
 
 2. 同步时间
-cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+\cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 yum -y install ntp
 ntpdate 0.centos.pool.ntp.org
 

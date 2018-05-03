@@ -1,6 +1,7 @@
 #1 install
  yum install -y monit
-
+ chkconfig monit on
+ 
 #2 config conf
  vi /etc/monit.conf
 

@@ -1,0 +1,13 @@
+# 自启动
+/usr/sbin/nginx
+
+pkill fdfs_trackerd
+pkill fdfs_storaged
+
+/usr/bin/fdfs_trackerd /etc/fdfs/tracker_pic.conf
+/usr/bin/fdfs_trackerd /etc/fdfs/tracker_media.conf
+
+/usr/bin/fdfs_storaged /etc/fdfs/storage_pic.conf
+/usr/bin/fdfs_storaged /etc/fdfs/storage_media.conf
+
+/usr/local/sphinx/bin/searchd
