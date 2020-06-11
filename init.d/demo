@@ -1,0 +1,82 @@
+#!/bin/sh
+#
+#  /etc/init.d/promote
+#
+#  Runs as Service.
+#
+# chkconfig: - 85 15
+# processname: promote
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# Default values
+USER=root
+NAME=promote
+GO_PATH=/data/app/go/${NAME}
+LOCK_FILE=/var/lock/subsys/promote
+LOG_FILE=${GO_PATH}/${NAME}.log
+RES=0
+
+# Read configuration from /etc/sysconfig/gogs to override defaults
+[ -r /etc/sysconfig/${NAME} ] && . /etc/sysconfig/${NAME}
+
+# Don't do anything if nothing is installed
+[ -x ${GO_PATH} ] || exit 0
+
+# daemon_opts
+DAEMON_OPTS="--check ${NAME} "
+
+# Set additional options, if any
+[ ! -z "$USER" ] && DAEMON_OPTS="$DAEMON_OPTS --user=${USER}"
+
+start() {
+    cd ${GO_PATH}
+    echo -n "Starting ${NAME}"
+    daemon ${DAEMON_OPTS} "${GO_PATH}/promote >> ${LOG_FILE} 2>&1 &"
+    RES=$?
+
+    if [ ${RES} = 0 ] ;then
+        touch ${LOCK_FILE}
+        echo $$ >/var/run/${NAME}.pid
+        echo
+    fi
+
+    return ${RES}
+}
+
+stop() {
+    cd ${GO_PATH}
+    echo -n "Stopping ${NAME}"
+    killproc ${NAME}
+    RES=$?
+    rm -f ${LOCK_FILE}
+    rm -f /var/run/${NAME}.pid
+    echo
+}
+
+case "$1" in
+    start)
+        status ${NAME} > /dev/null 2>&1 && exit 0
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status ${NAME}
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    reload)
+        start
+        ;;
+    *)
+        echo "Usage: ${NAME} {start|stop|status|reload|restart}"
+        exit 1
+        ;;
+esac
+exit ${RES}
